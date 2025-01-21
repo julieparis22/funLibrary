@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_20_155018) do
-  create_table "books", force: :cascade do |t|
+ActiveRecord::Schema[8.0].define(version: 2025_01_21_214605) do
+  create_table "books", id: :string, force: :cascade do |t|
     t.string "title"
     t.string "author"
-    t.boolean "is_borrowed"
+    t.boolean "is_borrowed", default: false
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
