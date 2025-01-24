@@ -1,0 +1,30 @@
+<!-- app/views/books/edit.html.erb -->
+<h1>Modifier le livre : <%= @book.title %></h1>
+
+<%= form_for @book do |f| %>
+  <div>
+    <%= f.label :title, 'Titre' %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :author, 'Auteur' %>
+    <%= f.text_field :author %>
+  </div>
+
+  <div>
+    <%= f.label :is_borrowed, 'Emprunté' %>
+    <%= f.check_box :is_borrowed %>
+  </div>
+
+  <div>
+    <%= f.label :date, 'Date' %>
+    <%= f.date_field :date %>
+  </div>
+
+  <div>
+    <%= f.submit 'Mettre à jour' %>
+  </div>
+<% end %>
+
+<%= link_to 'Annuler', books_path %>
