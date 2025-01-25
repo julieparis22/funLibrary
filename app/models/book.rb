@@ -1,5 +1,6 @@
 class Book < ApplicationRecord
-  # Validation des attributs
+  belongs_to :lector
+
   validates :title, presence: true
   validates :author, presence: true
   validates :is_borrowed, inclusion: { in: [true, false] }
@@ -7,15 +8,14 @@ class Book < ApplicationRecord
   # Validation personnalisée pour 'date'
   validate :date_presence_based_on_is_borrowed
 
-  # Générer un UUID avant la création d'un livre
+  # Générer un UUID avant la création du livre
   before_create :generate_uuid
 
-  # Réinitialiser la date si 'is_borrowed' est repassé à false
-  before_save :reset_date_if_not_borrowed
+  # Réinitialiser la date et l'association avec lector si 'is_borrowed' est repassé à false
+  before_save :reset_date_and_lector_if_not_borrowed
 
   private
 
-  # Méthode pour générer un UUID si un UUID n'est pas déjà défini
   def generate_uuid
     self.id ||= SecureRandom.uuid
   end
@@ -29,10 +29,17 @@ class Book < ApplicationRecord
     if !is_borrowed && !date.nil?
       errors.add(:date, "doit être vide si le livre n'est pas emprunté.")
     end
+
+    if is_borrowed && lector.nil?
+      errors.add(:lector, "doit être associé si le livre est emprunté.")
+    end
   end
 
-  # Réinitialiser la date si 'is_borrowed' est repassé à false
-  def reset_date_if_not_borrowed
-    self.date = nil unless is_borrowed
+  # Réinitialiser la date et supprimer l'association avec lector si 'is_borrowed' devient false
+  def reset_date_and_lector_if_not_borrowed
+    if !is_borrowed
+      self.date = nil
+      self.lector = nil
+    end
   end
 end

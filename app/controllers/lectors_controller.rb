@@ -6,10 +6,9 @@ class LectorsController < ApplicationController
       @lectors = Lector.all
     end
   
-    # GET /lectors/1
     def show
-    end
-  
+        @books = @lector.books || [] # Si @lector.books est nil, on assigne une liste vide
+      end
     # GET /lectors/new
     def new
       @lector = Lector.new
