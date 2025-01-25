@@ -1,0 +1,20 @@
+<!-- app/views/lectors/show.html.erb -->
+
+<h1><%= @lector.first_name %> <%= @lector.last_name %></h1>
+<p><%= @lector.address %></p>
+<p><%= @lector.email %></p>
+
+<h2>Livres associés :</h2>
+<% if @books && @books.any? %> 
+  <ul>
+    <% @books.each do |book| %>
+      <li>
+        <%= link_to book.title, book_path(book) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun livre associé.</p>
+<% end %>
+
+<%= link_to 'Retour', lectors_path, class: 'btn btn-secondary' %>

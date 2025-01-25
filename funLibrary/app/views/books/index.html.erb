@@ -1,0 +1,39 @@
+<%= link_to 'Ajouter un livre', new_book_path, class: "button" %>
+
+<table>
+  <thead>
+    <tr>
+
+      <th>Titre</th>
+      <th>Auteur</th>
+      <th>Emprunté ?</th>
+      <th>Date de retour (si emprunté) </th>
+      <th>Lecteur</th> <!-- Colonne pour afficher le lecteur -->
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+     
+        <td><%= book.title %></td>
+        <td><%= book.author %></td>
+        <td><%= book.is_borrowed ? "Oui" : "Non" %></td>
+        <td><%= book.date || "Non spécifiée" %></td>
+        <td>
+          <% if book.is_borrowed && book.lector %>
+            <%= link_to "#{book.lector.first_name} #{book.lector.last_name}", lector_path(book.lector) %> <!-- Lien vers la page show du lector -->
+          <% else %>
+            Non emprunté
+          <% end %>
+        </td>
+        <td>
+          <%= link_to 'Modifier', edit_book_path(book) %> |
+          <%= link_to 'Supprimer', book_path(book), method: :delete, data: { confirm: 'Confirmer suppression?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= button_to "Gestion de livres", books_path, method: :get, class: "btn btn-primary custom-button" %>
+<%= button_to "Relation avec les lecteurs", lectors_path, method: :get, class: "btn btn-secondary custom-button" %>

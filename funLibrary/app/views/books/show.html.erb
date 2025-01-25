@@ -1,0 +1,8 @@
+<!-- app/views/books/show.html.erb -->
+<h1><%= @book.title %></h1>
+<p><strong>Auteur :</strong> <%= @book.author %></p>
+<p><strong>Emprunté :</strong> <%= @book.is_borrowed ? 'Oui' : 'Non' %></p>
+<p><strong>Date de retour :</strong> <%= @book.date %></p>
+<%= link_to 'Modifier', edit_book_path(@book) %> |
+<%= link_to 'Supprimer', @book, method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer ce livre ?' } %> |
+<%= link_to 'Retourner à la liste de livres', books_path %>
