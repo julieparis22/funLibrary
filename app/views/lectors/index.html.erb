@@ -19,10 +19,10 @@
         <td><%= lector.last_name %></td>
         <td><%= lector.address %></td>
         <td><%= lector.email %></td>
-      <td><%= lector.uuid %></td>
+
         <td>
-          <%= link_to 'Show', lector_path(lector) %> |
-          <%= link_to 'Edit', edit_lector_path(lector) %> |
+          <%= link_to 'Afficher', lector_path(lector) %> |
+          <%= link_to 'Editer', edit_lector_path(lector) %> |
           <%= link_to 'Destroy', lector_path(lector), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
