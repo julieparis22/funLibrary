@@ -4,4 +4,5 @@ Rails.application.routes.draw do
     get '/success', to: 'success#show'  
 
     resources :books
+    resources :lectors
   end
