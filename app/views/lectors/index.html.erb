@@ -1,0 +1,34 @@
+<h1>Lectors</h1>
+
+<%= link_to 'Ajouter un nouveau lecteur', new_lector_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Prénom</th>
+      <th>Nom</th>
+      <th>Addresse</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @lectors.each do |lector| %>
+      <tr>
+        <td><%= lector.first_name %></td>
+        <td><%= lector.last_name %></td>
+        <td><%= lector.address %></td>
+        <td><%= lector.email %></td>
+
+        <td>
+          <%= link_to 'Afficher', lector_path(lector) %> |
+          <%= link_to 'Editer', edit_lector_path(lector) %> |
+          <%= link_to 'Supprimer', lector_path(lector), method: :delete, data: { confirm: 'Etes vous sur ?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= button_to "Gestion de livres", books_path, method: :get, class: "btn btn-primary custom-button" %>
+<%= button_to "Relation avec les lecteurs", lectors_path, method: :get, class: "btn btn-secondary custom-button" %>
+
